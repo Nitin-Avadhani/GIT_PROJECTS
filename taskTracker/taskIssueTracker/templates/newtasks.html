@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </style>
+    <style type="text/css">
+      .container-bg-clr-op {
+        background-color: #000000;
+        opacity: 0.5;
+      }
+    </style>
+    <title>Task Tracker</title>
+  </head>
+  <body>
+    <div class="jumbotron" style="background-image: url(/static/taskIssueTracker/708318.jpg); margin-top: 10px;">
+      <div class="container" style="color: white;">
+        <form class="needs-validation" novalidate action="/taskIssueTracker/taskpush/" method="POST">{% csrf_token %}
+          <div class="form-row" style="padding-left : 380px;">
+            <div class="col-md-6 mb-3" >
+              <label for="validationCustom01">Task Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="task" required></textarea>
+              <div class="invalid-feedback">
+                Please enter the task.
+              </div>
+              <div class="valid-feedback">
+                Looks Good.
+              </div>
+            </div>
+          </div>
+          <div class="form-row" style="padding-left : 380px;">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom02">Owner</label>
+              <input type="text" class="form-control" id="validationCustom02" placeholder="Owner" name="owner" required>
+              <div class="invalid-feedback">
+                Please enter Owner Name.
+              </div>
+              <div class="valid-feedback">
+                Looks Good.
+              </div>
+            </div>
+          </div>
+          <div class="form-row" style="padding-left : 380px;">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustomUsername">Choose Task Status</label>
+              <select class="form-control" name="status" id="validationStatusCheck" required>
+                <option value="">Select</option>
+                <option value="Completed">Completed</option>
+                <option value="Yet to start">Yet to start</option>
+                <option value="In Progress">In Progress</option>
+              </select>
+              <div class="invalid-feedback">
+                 Please select one of the status.
+              </div>
+              <div class="valid-feedback">
+                 Looks Good
+              </div>
+            </div>
+          </div>
+          <div class="form-row" style="padding-left : 380px;">
+            <div class="col-md-6 mb-3" >
+              <label for="validationCustom01">Comments</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comments"></textarea>
+              <div class="valid-feedback">
+                * Optional.
+              </div>
+            </div>
+          </div>
+          <div class="form-row" style="padding-left : 380px;">
+            <div class="col-md-6 mb-3" >
+              <button class="btn btn-primary" type="submit" style="width: 100px;">Add</button>
+            </div>
+          </div>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden;">
+          <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden;">
+        </form>
+      </div>
+    </div>
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+  </body>
+</html>
+
+<!-- 
+ <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationCustom03">City</label>
+      <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+      <div class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationCustom04">State</label>
+      <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
+      <div class="invalid-feedback">
+        Please provide a valid state.
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationCustom05">Zip</label>
+      <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+      <div class="invalid-feedback">
+        Please provide a valid zip.
+      </div>
+    </div>
+  </div> -->

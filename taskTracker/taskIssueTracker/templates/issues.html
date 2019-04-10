@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </style>
+    <title>Task Tracker</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1>Welcome {{name}}</h1>
+      <!-- <div class="col-md-6 mb-3">
+        <form class="needs-validation" novalidate action="/taskIssueTracker/login/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary align-items-left" type="submit" style="width: 200px;">Logout</button>
+        </form>
+      </div> -->
+            <br>
+      
+          <!-- <div class="form-row">
+            <div class="col-md-6 mb-3" >
+                <form class="needs-validation" novalidate action="/taskIssueTracker/addproject/" method="POST">{% csrf_token %}
+                  <button class="btn btn-primary" type="submit" style="width: 200px;">Add Project</button>
+                  <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden;">
+                </form>
+            </div>
+          </div> -->
+<!--               <div class="form-row" style="padding-left : 250px;">
+                <div class="col-md-6 mb-3" >
+                  <form class="needs-validation" novalidate action="/taskIssueTracker/addtask/" method="POST">{% csrf_token %}
+                    <button class="btn btn-primary" type="submit" style="width: 200px;">New Tasks</button>
+                    <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden;">
+                    <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden;">
+                  </form>
+                </div>
+                <div class="col-md-6 mb-3" >
+                  <form class="needs-validation" novalidate action="/taskIssueTracker/updatetasklist/" method="POST">{% csrf_token %}
+                    <button class="btn btn-primary" type="submit" style="width: 200px;">Update Tasks</button>
+                    <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden;">
+                    <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden;">
+                  </form>
+                </div>
+              </div> -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <form class="needs-validation" novalidate action="/taskIssueTracker/userrehome_1/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit">Home</button>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden; width: 0px;">
+        </form>
+        <form class="needs-validation" novalidate action="/taskIssueTracker/issues/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit">View Issues</button>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden; width: 0px;">
+          <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden; width: 0px;">
+        </form>
+        <form class="needs-validation" novalidate action="/taskIssueTracker/addissue/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit">Add New Issue</button>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden; width: 0px;">
+          <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden; width: 0px;">
+        </form>
+        <form class="needs-validation" novalidate action="/taskIssueTracker/updateissuelist/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit">Update Issues</button>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden; width: 0px;">
+          <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden; width: 0px;">
+        </form>
+        <form class="needs-validation" novalidate action="/taskIssueTracker/login/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary align-items-left" type="submit">Logout</button>
+        </form>
+      </nav>       
+      <br>
+      <div class="container" >
+        <table class="table table-striped">
+            <tr class="bg-primary" style="color: white;">
+              <th class="bg-primary">Issue</th>
+              <th class="bg-primary">Owner</th>
+              <th class="bg-primary">Status</th>
+              <th class="bg-primary">Comments</th>
+            </tr>
+          <tbody>
+            {% for item in objects %}
+              {% if item.usernameid == user and item.projectid == projectid%}
+              <tr>
+                <td scope="row" style="width: 350px;">
+                  {{item.issue}}
+                </td>
+                <td scope="row" style="width: 200px;">
+                  {{item.owner}}
+                </td>
+                <td scope="row" style="width: 200px;">
+                  {{item.status}}
+                </td>
+                <td scope="row" style="width: 350px;">
+                  {{item.comments}}
+                </td>
+              </tr>
+                {% endif %}
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+<!-- April@2019 -->
+      <!-- <div class="container" style="color: white; margin-top: 60px;">
+        <form class="needs-validation" novalidate action="/taskIssueTracker/login/">
+          <div class="form-row" style="padding-left : 380px;">
+            <div class="col-md-6 mb-3" >
+              <label for="validationCustom01">User Name</label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="User Name" required>
+              <div class="invalid-feedback">
+                Please enter the username.
+              </div>
+              <div class="valid-feedback">
+                Looks Good.
+              </div>
+            </div>
+          </div>
+          <div class="form-row" style="padding-left : 380px;">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom02">Password</label>
+              <input type="password" class="form-control" id="validationCustom02" placeholder="Password" required>
+              <div class="invalid-feedback">
+                Please enter password.
+              </div>
+              <div class="valid-feedback">
+                Looks Good.
+              </div>
+            </div>
+          </div>
+          <span style="padding-left : 380px;"><button class="btn btn-primary" type="submit">Add Project</button></span>
+        </form>
+      </div> -->
+  </body>
+</html>

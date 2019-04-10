@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </style>
+    <title>Task Tracker</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1>Welcome {{name}}</h1>
+      <br>
+      <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <form class="needs-validation" novalidate action="/taskIssueTracker/userrehome_1/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit">Home</button>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden; width: 0px;">
+        </form>
+        <form class="needs-validation" novalidate action="/taskIssueTracker/tasks/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit">View Tasks</button>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden; width: 0px;">
+          <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden; width: 0px;">
+        </form>
+        <form class="needs-validation" novalidate action="/taskIssueTracker/addtask/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit">Add New Task</button>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden; width: 0px;">
+          <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden; width: 0px;">
+        </form>
+        <form class="needs-validation" novalidate action="/taskIssueTracker/updatetasklist/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit">Update Tasks</button>
+          <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden; width: 0px;">
+          <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden; width: 0px;">
+        </form>
+        <form class="needs-validation" novalidate action="/taskIssueTracker/login/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary align-items-left" type="submit">Logout</button>
+        </form>
+      </nav>    
+      <div class="container" >
+        <table class="table table-striped">
+            <tr class="bg-primary" style="color: white;">
+              <th class="bg-primary">Task</th>
+              <th class="bg-primary">Owner</th>
+              <th class="bg-primary">Status</th>
+              <th class="bg-primary">Comments</th>
+              <th class="bg-primary">Click to update</th>
+            </tr>
+          <tbody>
+            {% for item in objects %}
+              {% if item.usernameid == user and item.projectid == projectid%}
+              <form class="needs-validation" novalidate action="/taskIssueTracker/updatetask/" method="POST">{% csrf_token %}
+                <input type="text" name="usernameid" value="{{user}}" style="visibility: hidden;">
+                <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden;">
+                <input type="text" name="taskid" value="{{item.taskid}}" style="visibility: hidden;">
+                <tr>
+                  <td scope="row" style="width: 350px;">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="task" readonly>{{item.task}}</textarea>
+                  </td>
+                  <td scope="row" style="width: 200px; vertical-align: middle;">
+                    <input type="text" class="form-control" id="validationCustom02" placeholder="Owner" name="owner" value="{{item.owner}}" required>
+                  </td>
+                  <td scope="row" style="width: 200px; vertical-align: middle;">
+                    <select class="form-control" name="status" id="validationStatusCheck" required>
+                      {% if item.status == "Completed" %}
+                        <option value="{{item.status}}">{{item.status}}</option>
+                        <option value="Yet to start">Yet to start</option>
+                        <option value="In Progress">In Progress</option>
+                      {% elif item.status == "Yet to start" %}
+                        <option value="{{item.status}}">{{item.status}}</option>
+                        <option value="Completed">Completed</option>
+                        <option value="In Progress">In Progress</option>
+                      {% elif item.status == "In Progress" %}
+                        <option value="{{item.status}}">{{item.status}}</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Yet to start">Yet to start</option>
+                      {% endif %}
+                    </select>
+                  </td>
+                  <td scope="row" style="width: 350px;">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comments">{{item.comments}}</textarea>
+                  </td>
+                  <td scope="row" style="width: 200px; vertical-align: middle; ">
+                    <center>
+                      <button class="btn btn-primary" type="submit" style="width: 100px; ">Update <i class="fa fa-check-square-o"></i></button>
+                    </center>
+                  </td>
+                </tr>
+              </form>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
