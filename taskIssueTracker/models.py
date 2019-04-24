@@ -22,6 +22,10 @@ class TaskList(models.Model):
 	task = models.CharField(max_length = 1000)
 	owner = models.CharField(max_length = 200)
 	status = models.CharField(max_length = 100)
+	expt_strt_date = models.CharField(max_length = 100)
+	expt_end_date = models.CharField(max_length = 100)
+	act_strt_date = models.CharField(max_length = 100)
+	act_end_date = models.CharField(max_length = 100)
 	comments = models.CharField(max_length = 1000)
 	taskid = models.CharField(max_length = 1000)
 
@@ -34,6 +38,10 @@ class IssueList(models.Model):
 	issue = models.CharField(max_length = 1000)
 	owner = models.CharField(max_length = 200)
 	status = models.CharField(max_length = 100)
+	expt_strt_date = models.CharField(max_length = 100)
+	expt_end_date = models.CharField(max_length = 100)
+	act_strt_date = models.CharField(max_length = 100)
+	act_end_date = models.CharField(max_length = 100)
 	comments = models.CharField(max_length = 1000)
 	issueid = models.CharField(max_length = 1000)
 

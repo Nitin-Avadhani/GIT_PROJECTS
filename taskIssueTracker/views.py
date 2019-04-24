@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from taskIssueTracker.models import User, Project, TaskList, IssueList
+import datetime
 
 def userregistration(request):
 	return render(request, "userRegistration.html")
@@ -98,11 +99,15 @@ def taskpush(request):
 	project = request.POST['projectid']
 	task = request.POST['task']
 	owner = request.POST['owner']
+	exptstrtdate =  str(datetime.datetime.strptime(request.POST['exptstrtdate'], "%Y-%m-%d").date().strftime('%d-%b-%Y')
+)
+	exptenddate =  str(datetime.datetime.strptime(request.POST['exptenddate'], "%Y-%m-%d").date().strftime('%d-%b-%Y')
+)
 	for item in request.POST.getlist('status'):
    		status = item
 	comments = request.POST['comments']
 
-	projectdetails = TaskList.objects.create(projectid = project,usernameid = username, task = task, owner = owner, status = status, comments = comments)
+	projectdetails = TaskList.objects.create(projectid = project,usernameid = username, task = task, owner = owner, status = status, comments = comments, expt_strt_date = exptstrtdate, expt_end_date = exptenddate)
 	taskidgenerator()
 
 	singleuserdetails = User.objects.get(usernameid = username)
@@ -136,6 +141,18 @@ def updatetask(request):
 	project = request.POST['projectid']
 	taskid = request.POST['taskid']
 	owner = request.POST['owner']
+	if request.POST['actstrtdate']!="":
+		actstrtdate =  str(datetime.datetime.strptime(request.POST['actstrtdate'], "%Y-%m-%d").date().strftime('%d-%b-%Y')
+)
+	else:
+		actstrtdate=""
+
+	if request.POST['actenddate']!="":
+		actenddate =  str(datetime.datetime.strptime(request.POST['actenddate'], "%Y-%m-%d").date().strftime('%d-%b-%Y')
+)
+	else:
+		actenddate=""
+
 	for item in request.POST.getlist('status'):
    		status = item
 	comments = request.POST['comments']
@@ -144,6 +161,8 @@ def updatetask(request):
 	taskobjectupdate.owner = owner
 	taskobjectupdate.status = status
 	taskobjectupdate.comments = comments
+	taskobjectupdate.act_strt_date = actstrtdate
+	taskobjectupdate.act_end_date = actenddate
 	taskobjectupdate.save()
 
 	singleuserdetails = User.objects.get(usernameid = username)
@@ -176,11 +195,15 @@ def issuepush(request):
 	project = request.POST['projectid']
 	issue = request.POST['issue']
 	owner = request.POST['owner']
+	exptstrtdate =  str(datetime.datetime.strptime(request.POST['exptstrtdate'], "%Y-%m-%d").date().strftime('%d-%b-%Y')
+)
+	exptenddate =  str(datetime.datetime.strptime(request.POST['exptenddate'], "%Y-%m-%d").date().strftime('%d-%b-%Y')
+)
 	for item in request.POST.getlist('status'):
    		status = item
 	comments = request.POST['comments']
 
-	projectdetails = IssueList.objects.create(projectid = project,usernameid = username, issue = issue, owner = owner, status = status, comments = comments)
+	projectdetails = IssueList.objects.create(projectid = project,usernameid = username, issue = issue, owner = owner, status = status, comments = comments,expt_strt_date = exptstrtdate, expt_end_date = exptenddate)
 	issueidgenerator()
 
 	singleuserdetails = User.objects.get(usernameid = username)
@@ -213,6 +236,18 @@ def updateissue(request):
 	project = request.POST['projectid']
 	issueid = request.POST['issueid']
 	owner = request.POST['owner']
+	if request.POST['actstrtdate']!="":
+		actstrtdate =  str(datetime.datetime.strptime(request.POST['actstrtdate'], "%Y-%m-%d").date().strftime('%d-%b-%Y')
+)
+	else:
+		actstrtdate=""
+
+	if request.POST['actenddate']!="":
+		actenddate =  str(datetime.datetime.strptime(request.POST['actenddate'], "%Y-%m-%d").date().strftime('%d-%b-%Y')
+)
+	else:
+		actenddate=""
+		
 	for item in request.POST.getlist('status'):
    		status = item
 	comments = request.POST['comments']
@@ -220,6 +255,8 @@ def updateissue(request):
 	issueobjectupdate = IssueList.objects.get(usernameid = username, projectid = project, issueid = issueid)
 	issueobjectupdate.owner = owner
 	issueobjectupdate.status = status
+	issueobjectupdate.act_strt_date = actstrtdate
+	issueobjectupdate.act_end_date = actenddate
 	issueobjectupdate.comments = comments
 	issueobjectupdate.save()
 

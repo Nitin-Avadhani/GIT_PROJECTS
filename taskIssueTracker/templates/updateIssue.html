@@ -39,13 +39,15 @@
         </form>
       </nav> 
       <div class="container" >
-        <table class="table table-striped">
-            <tr class="bg-primary" style="color: white;">
-              <th class="bg-primary">Issue</th>
-              <th class="bg-primary">Owner</th>
-              <th class="bg-primary">Status</th>
-              <th class="bg-primary">Comments</th>
-              <th class="bg-primary">Click to update</th>
+        <table class="table table-striped" style="width: 1250px; margin-left: 0px; padding-left: 0px; padding-top: 0px; margin-top: 0px;">
+            <tr class="bg-primary" style="color: white; text-align: center;">
+              <th class="bg-primary" style="vertical-align: middle;">Issue</th>
+              <th class="bg-primary" style="vertical-align: middle;">Owner</th>
+              <th class="bg-primary" style="vertical-align: middle;">Status</th>
+              <th class="bg-primary" style="vertical-align: middle;">Expected / Actual Start Date</th>
+              <th class="bg-primary" style="vertical-align: middle;">Expected / Actual End Date</th>
+              <th class="bg-primary" style="vertical-align: middle;">Comments</th>
+              <th class="bg-primary" style="vertical-align: middle;">Click to update</th>
             </tr>
           <tbody>
             {% for item in objects %}
@@ -55,13 +57,13 @@
                 <input type="text" name="projectid" value="{{projectid}}" style="visibility: hidden;">
                 <input type="text" name="issueid" value="{{item.issueid}}" style="visibility: hidden;">
                 <tr>
-                  <td scope="row" style="width: 350px;">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="issue" readonly>{{item.issue}}</textarea>
+                  <td scope="row" style="width: 1500px;">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="issue" cols="50" wrap="shrink-to-fit" readonly>{{item.issue}}</textarea>
                   </td>
-                  <td scope="row" style="width: 200px; vertical-align: middle;">
+                  <td scope="row" style="width: 500px; vertical-align: middle;">
                     <input type="text" class="form-control" id="validationCustom02" placeholder="Owner" name="owner" value="{{item.owner}}" required>
                   </td>
-                  <td scope="row" style="width: 200px; vertical-align: middle;">
+                  <td scope="row" style="width: 700px; vertical-align: middle;">
                     <select class="form-control" name="status" id="validationStatusCheck" required>
                       {% if item.status == "Completed" %}
                         <option value="{{item.status}}">{{item.status}}</option>
@@ -78,8 +80,18 @@
                       {% endif %}
                     </select>
                   </td>
-                  <td scope="row" style="width: 350px;">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comments">{{item.comments}}</textarea>
+                  <td scope="row" style="width: 200px;">
+                    Expected Start Date:<br>{{item.expt_strt_date}}<br>
+                    Actual Start Date:<br>{{item.act_strt_date}}<br>
+                    <input type="date" class="form-control" id="validationCustom02" placeholder="date" name="actstrtdate" style="width: 170px;" required>
+                  </td>
+                  <td scope="row" style="width: 200px;">
+                    Expected End Date:<br>{{item.expt_end_date}}<br>
+                    Actual End Date:<br>{{item.act_end_date}}<br>
+                    <input type="date" class="form-control" id="validationCustom02" placeholder="date" name="actenddate" style="width: 170px;" required>
+                  </td>
+                  <td scope="row" style="width: 1000px;">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" cols="50" wrap="shrink-to-fit" name="comments">{{item.comments}}</textarea>
                   </td>
                   <td scope="row" style="width: 200px; vertical-align: middle; ">
                     <center>

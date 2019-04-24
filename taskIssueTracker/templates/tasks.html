@@ -75,6 +75,10 @@
               <th class="bg-primary">Task</th>
               <th class="bg-primary">Owner</th>
               <th class="bg-primary">Status</th>
+              <th class="bg-primary">Expected Start Date</th>
+              <th class="bg-primary">Expected End Date</th>
+              <th class="bg-primary">Actual Start Date</th>
+              <th class="bg-primary">Actual End Date</th>
               <th class="bg-primary">Comments</th>
             </tr>
           <tbody>
@@ -89,6 +93,18 @@
                 </td>
                 <td scope="row" style="width: 200px;">
                   {{item.status}}
+                </td>
+                <td scope="row" style="width: 200px;">
+                  {{item.expt_strt_date}}
+                </td>
+                <td scope="row" style="width: 200px;">
+                  {{item.expt_end_date}}
+                </td>
+                <td scope="row" style="width: 200px;">
+                  {{item.act_strt_date}}
+                </td>
+                <td scope="row" style="width: 200px;">
+                  {{item.act_end_date}}
                 </td>
                 <td scope="row" style="width: 350px;">
                   {{item.comments}}
